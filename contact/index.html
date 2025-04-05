@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ryan Cao: Contact</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../style.css">
 </head>
 <body>
   <nav>
@@ -19,25 +19,22 @@
   <p>Feel free to reach out to me via email or social media!</p>
 
   <form action="mailto:rycao@ucsd.com" method="POST" enctype="text/plain">
-    <label>
-      Your Email:
-      <input type="email" name="email" required>
-    </label>
-    <br><br>
+    <div class="form-group">
+      <label for="email">Your Email:</label>
+      <input type="email" id="email" name="email" required>
+    </div>
 
-    <label>
-      Subject:
-      <input name="subject" required>
-    </label>
-    <br><br>
+    <div class="form-group">
+      <label for="subject">Subject:</label>
+      <input type="text" id="subject" name="subject" required>
+    </div>
 
-    <label>
-      Message:
-      <textarea name="body" rows="5" cols="30" required></textarea>
-    </label>
-    <br><br>
+    <div class="form-group">
+      <label for="body">Message:</label>
+      <textarea id="body" name="body" rows="4" required></textarea>
+    </div>
 
-    <button>Send Message</button>
+    <button type="submit">Send Message</button>
   </form>
 </body>
 </html>
