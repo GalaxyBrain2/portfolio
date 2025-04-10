@@ -1,6 +1,204 @@
+:root {
+  --color-accent: oklch(65% 50% 0);
+}
 body {
     /* Set line height to 1.5 times the font size
          and use the OS’s UI font as the website font
        */
+    max-width: 100ch;
+    margin-inline: auto;
+    padding: 2ch;
+    font-family: sans-serif;
+    line-height: 1.5;
     font: 100%/1.5 system-ui;
+    accent-color: var(--color-accent);
   }
+  h1, h2, h3 {
+    text-wrap: balance;
+    line-height: 1.2;
+  }
+  
+  nav {
+    display: flex;
+    border-bottom: 1px solid oklch(80% 3% 200);
+  }
+  nav ul, nav li {
+    display: contents;
+  }
+  
+  nav a {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    padding: 0.5em;
+    margin-bottom: auto;
+  }
+  
+  nav a.current {
+    border-bottom: 0.4em solid oklch(80% 3% 200);
+  }
+  
+  nav a:hover {
+    border-bottom: 0.4em solid var(--color-accent);
+    background-color: oklch(from var(--color-accent) 95% 5% h);
+  }
+  /* contact form styling */
+  form {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1em;
+    font: inherit;
+  }
+  
+  label, button {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
+  }
+  
+  form button {
+    grid-column: 1 / -1;
+    padding: 0.5em;
+    font: inherit;
+    cursor: pointer;
+  }
+  /* Projects styling */
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+    gap: 1em;
+    margin-block: 2em;
+  }
+  
+  .projects article {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+    padding: 1em;
+    gap: 1em;
+    border: 1px solid #ccc;
+    border-radius: 0.5em;
+    background: #fafafa;
+  }
+  
+  .projects h2 {
+    margin: 0;
+    font-size: 1.2em;
+  }
+  
+  .projects img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  h1 {
+    font-size: 400%;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  .resume {
+    padding-top: 2em;
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+  }
+  
+  .resume h1 {
+    font-size: 250%;
+    color: #333;
+    text-align: center;
+  }
+  
+  .resume h2 {
+    font-size: 1.5em;
+    color: #007BFF;
+    margin-bottom: 1em;
+    text-transform: uppercase;
+  }
+  
+  .resume section h2 {
+    border-bottom: 2px solid #007BFF;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+  }
+  
+  .resume section ul {
+    margin: 0;
+    padding-left: 2ch;
+    list-style: none;
+  }
+  
+  .resume section ul li {
+    margin-bottom: 0.8em;
+    font-size: 1.1em;
+  }
+  
+  .line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  
+  .right-side {
+    margin-left: auto;
+    text-align: right;
+  }
+  
+  /* Styling forresume header */
+  
+  .header header {
+    text-align: center;
+    padding: 2em;
+  }
+  
+  .contact {
+    display: flex;
+    justify-content: center;
+    gap: 3em;
+  }
+  
+  .header, .education, .skills, .experience {
+    margin-bottom: 1.5em;
+  }
+  
+  /* Styling for the article header */
+  article header {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  article time {
+    font-size: 1em;
+    color: #666;
+  }
+  
+  article ul {
+    margin-left: 2ch;
+  }
+  
+  article ul li {
+    margin-bottom: 0.6em;
+    font-size: 1.1em;
+  }
+  
+  /* Styling for Skills & Interests */
+  section ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5em;
+  }
+  
+  section ul li {
+    font-size: 1.1em;
+  }
+  
+  section ul li strong {
+    color: #007BFF;
+  }
+  
+  
