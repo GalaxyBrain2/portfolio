@@ -4,9 +4,6 @@ function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
 
-const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
-  ? "/"
-  : "/" + location.pathname.split("/")[1] + "/";
 let pages = [
     { url: '', title: 'Home' },
     { url: 'projects/', title: 'Projects'},
@@ -19,18 +16,20 @@ let nav = document.createElement('nav');
 document.body.prepend(nav);
 
 for (let p of pages) {
+    const IS_HOME = document.documentElement.classList.contains('home');
     let url = p.url;
-    if (!url.startsWith("http")) {
-        url = BASE_PATH + url;
+    if (!url.startsWith("http") && !IS_HOME) {
+        url = '../' + url;
     }
     let a = document.createElement("a");
     a.href = url;
     a.textContent = p.title;
-    a.classList.toggle(
-        "current",
-        a.host === location.host && a.pathname === location.pathname
-    );
-    a.toggleAttribute("target", a.host !== location.host);
+    if (a.host === location.host && a.pathname === location.pathname) {
+        a.classList.add('current');
+    }
+    if (a.host !== location.host) {
+        a.target = '_blank';
+    }
     nav.append(a);
 }  
 document.body.insertAdjacentHTML(
@@ -56,6 +55,5 @@ document.body.insertAdjacentHTML(
     setColorScheme(localStorage.colorScheme);
   }
   select.addEventListener('input', function (event) {
-    console.log('color scheme changed to', event.target.value);
     setColorScheme(event.target.value);
   });
