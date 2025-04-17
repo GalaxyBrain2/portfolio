@@ -1,48 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact</title>
-  <link rel="stylesheet" href="../style.css">
-  <script type="module" src="../global.js"></script>
+  <link rel="stylesheet" href="/style.css" />
+  <script type="module" src="/global.js"></script>
 </head>
 <body>
 
   <h1>Contact</h1>
-  <p>Feel free to reach out to me via email or social media!</p>
+  <p>Feel free to reach out to me via email!</p>
 
-  <form id = "contactForm" action="mailto:rycao@ucsd.com" method="GET" enctype="text/plain">
-    <label for="email">
-      Your Email:
-      <input type="email"  name="email" required>
-    </label>
-  
+  <form id="contactForm" action="mailto:rycao@ucsd.com" method="GET">
     <label for="subject">
       Subject:
-      <input name="subject" required>
+      <input id="subject" name="subject" required />
     </label>
-  
+
     <label for="body">
       Message:
-      <textarea name="body"></textarea>
+      <textarea id="body" name="body"></textarea>
     </label>
-  
+
     <button>Send Message</button>
   </form>
+
   <script type="module">
-    document.querySelector("#contactForm")?.addEventListener("submit", function(e) {
+    const form = document.querySelector("#contactForm");
+
+    form?.addEventListener("submit", function (e) {
       e.preventDefault();
 
-      const form = new FormData(this);
+      const data = new FormData(this);
       const params = [];
-      for (let [name, value] of form) {
-        params.push(`${encodeURIComponent(name)}=${encodeURIComponent(value)}`);
-      }
-      const url = `mailto:rycao@ucsd.com?${params.join("&")}`;
 
-      location.href = url;
+      for (let [name, value] of data) {
+        params.push(`${name}=${encodeURIComponent(value)}`);
+      }
+
+      const url = `${form.action}?${params.join("&")}`;
+      window.open(url, "_blank");
     });
   </script>
+
 </body>
 </html>
