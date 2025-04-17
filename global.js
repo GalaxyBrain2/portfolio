@@ -1,5 +1,5 @@
 console.log('IT’S ALIVE!');
-
+const BASE = '/Portfolio/';
 function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
@@ -19,9 +19,7 @@ for (let p of pages) {
     const IS_HOME = document.documentElement.classList.contains('home');
     let url = p.url;
     if (!url.startsWith("http")) {
-        if (!IS_HOME) {
-            url = '../portfolio/' + url;
-          }
+      url = BASE + url;
     }
     let a = document.createElement("a");
     let title = p.title;
