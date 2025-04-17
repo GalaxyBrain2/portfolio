@@ -18,8 +18,10 @@ document.body.prepend(nav);
 for (let p of pages) {
     const IS_HOME = document.documentElement.classList.contains('home');
     let url = p.url;
-    if (!url.startsWith("http") && !IS_HOME) {
-        url = '../' + url;
+    if (!url.startsWith("http")) {
+        if (!IS_HOME) {
+            url = url.startsWith('/') ? url : '../' + url;
+          }
     }
     let a = document.createElement("a");
     a.href = url;
