@@ -20,7 +20,7 @@ for (let p of pages) {
     let url = p.url;
     if (!url.startsWith("http")) {
         if (!IS_HOME) {
-            url = url.startsWith('/') ? url : '../' + url;
+            url = '../' + url;
           }
     }
     let a = document.createElement("a");
