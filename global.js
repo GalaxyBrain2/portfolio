@@ -6,7 +6,7 @@ function $$(selector, context = document) {
 
 const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
   ? "/"
-  : "/your-repo-name/";
+  : "/" + location.pathname.split("/")[1] + "/";
 let pages = [
     { url: '', title: 'Home' },
     { url: 'projects/', title: 'Projects'},
