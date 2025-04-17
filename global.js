@@ -1,7 +1,4 @@
 console.log('IT’S ALIVE!');
-const BASE = window.location.pathname.startsWith('/Portfolio/')
-  ? '/Portfolio/'
-  : '/';
 function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
@@ -20,9 +17,9 @@ document.body.prepend(nav);
 for (let p of pages) {
     const IS_HOME = document.documentElement.classList.contains('home');
     let url = p.url;
-    if (!url.startsWith("http")) {
+    if (!url.startsWith('http')) {
       if(!IS_HOME){
-        url = BASE + url;
+        url = "../" + url;
       }
     }
     let a = document.createElement("a");
