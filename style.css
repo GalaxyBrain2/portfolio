@@ -261,5 +261,37 @@ body {
   .color-scheme select {
     font: inherit;
   }
-  
+/* styling for git hub stats */
+#profile-stats {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 2px solid var(--border-color, oklch(80% 3% 200));
+  background: var(--background-color, canvas);
+  max-width: 600px;
+  margin-inline: auto;
+}
+
+#profile-stats dl {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  text-align: center;
+  margin: 0;
+  width: 100%;
+}
+
+#profile-stats dt {
+  font-weight: bold;
+  font-size: 0.9rem;
+  grid-row: 1;
+  color: var(--color-accent, oklch(65% 50% 0));
+}
+
+#profile-stats dd {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  grid-row: 2;
+  color: var(--text-color, canvastext);
+}
   
