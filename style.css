@@ -1,5 +1,6 @@
 :root {
   --color-accent: oklch(65% 50% 200);
+  --border-color: oklch(50% 10% 200 / 40%);
 }
 html {
   color-scheme: light dark;
@@ -206,35 +207,27 @@ body {
     font-size: 1.1em;
   }
   /* Styling for resume in dark mode*/
-  @media (prefers-color-scheme: dark) {
-    .resume {
-      font-family: "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-      background-color: #121212;
-      color: #e0e0e0;
-    }
-  
-    .resume h1,
-    .resume h2,
-    .resume section h2 {
-      color: #bb86fc;
-    }
-  
-    .resume section h2 {
-      border-bottom-color: #bb86fc;
-    }
-  
-    .resume section ul li strong {
-      color: #03dac6;
-    }
-  
-    article header {
-      color: #ffffff;
-    }
-  
-    article time {
-      color: #aaaaaa;
-    }
+@media (prefers-color-scheme: dark) {
+  .resume {
+    background-color: #121212;
+    color: #e0e0e0;
   }
+  .resume h1, .resume h2, .resume section h2 {
+    color: #bb86fc;
+  }
+  .resume section h2 {
+    border-bottom-color: #bb86fc;
+  }
+  .resume section ul li strong {
+    color: #03dac6;
+  }
+  article header {
+    color: #ffffff;
+  }
+  article time {
+    color: #aaaaaa;
+  }
+}
   /* Styling for Skills & Interests */
   section ul {
     display: grid;
@@ -265,10 +258,13 @@ body {
 #profile-stats {
   margin-top: 2rem;
   padding: 1rem;
-  border: 2px solid var(--border-color, oklch(80% 3% 200));
-  background: var(--background-color, canvas);
+  border: 2px solid var(--border-color);
+  background: var(--background-color);
   max-width: 600px;
   margin-inline: auto;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  color: var(--text-color);
 }
 
 #profile-stats dl {
@@ -279,18 +275,12 @@ body {
   margin: 0;
   width: 100%;
 }
-#profile-stats h2 {
-  font-size: 1.8em;
-  font-weight: bold;
-  margin-bottom: 1em;
-  text-align: left;
-}
 
 #profile-stats dt {
   font-weight: bold;
   font-size: 0.9rem;
   grid-row: 1;
-  color: var(--color-accent, oklch(65% 50% 0));
+  color: var(--color-accent);
 }
 
 #profile-stats dd {
@@ -298,6 +288,5 @@ body {
   font-size: 1.2rem;
   font-weight: bold;
   grid-row: 2;
-  color: var(--text-color, canvastext);
+  color: var(--text-color);
 }
-  
