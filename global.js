@@ -81,6 +81,6 @@ document.body.insertAdjacentHTML(
       container.appendChild(article);
     }
   }
-  export async function fetchGithubData(username) {
+  export async function fetchGitHubData(username) {
     return fetchJSON(`https://api.github.com/users/${username}`);
-  }
+} 

@@ -1,4 +1,4 @@
-import { fetchJSON, renderProjects, fetchGithubData } from '../global.js';
+import { fetchJSON, renderProjects, fetchGitHubData } from './global.js';
 
 const projects = await fetchJSON('../portfolio/lib/projects.json');
 const latestProjects = projects.slice(0, 3);
@@ -7,7 +7,7 @@ if (projectsContainer) {
     renderProjects(latestProjects, projectsContainer, 'h2');
   }
 
-const githubData = await fetchGithubData('GalaxyBrain2');
+const githubData = await fetchGitHubData('GalaxyBrain2');
 const profileStats = document.querySelector('#profile-stats');
 if (profileStats) {
     profileStats.innerHTML = `
