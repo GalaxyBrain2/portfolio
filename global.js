@@ -76,6 +76,7 @@ document.body.insertAdjacentHTML(
 
   export function renderProjects(project, containerElement, headingLevel = 'h2') {
     containerElement.innerHTML = '';
+    
     project.forEach(project => {
       const article = document.createElement('article');
       article.innerHTML = `
