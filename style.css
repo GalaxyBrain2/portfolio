@@ -1,6 +1,45 @@
 :root {
   --color-accent: oklch(65% 50% 200);
   --border-color: oklch(50% 10% 200 / 40%);
+  --background-color: #ffffff;
+  --text-color: #000000;       
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #121212; /* Dark background */
+    --text-color: #e0e0e0;        /* Light text */
+  }
+  /* resume dark mode tweaks */
+  .resume {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+
+  .resume h1, .resume h2, .resume section h2 {
+    color: #bb86fc;
+  }
+
+  .resume section h2 {
+    border-bottom-color: #bb86fc;
+  }
+
+  .resume section ul li strong {
+    color: #03dac6;
+  }
+
+  article header {
+    color: var(--text-color);
+  }
+
+  article time {
+    color: #aaaaaa;
+  }
+
+  .projects article {
+    background: #1e1e1e;
+    border: 1px solid #444;
+    color: var(--text-color);
+  }
 }
 html {
   color-scheme: light dark;
@@ -79,14 +118,9 @@ body {
   }
   
   .projects article {
-    display: grid;
-    grid-template-rows: subgrid;
-    grid-row: span 3;
-    padding: 1em;
-    gap: 1em;
-    border: 1px solid #ccc;
-    border-radius: 0.5em;
-    background: #fafafa;
+    background: var(--background-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
   }
   
   .projects h2 {
@@ -120,53 +154,7 @@ body {
       color: #bb86fc;
     }
   }
-  /* Resume styling for light mode(default) */
-  .resume {
-    padding-top: 2em;
-    font-family: 'Arial', sans-serif;
-    background-color: #f7f7f7;
-  }
   
-  .resume h1 {
-    font-size: 250%;
-    color: #333;
-    text-align: center;
-  }
-  
-  .resume h2 {
-    font-size: 1.5em;
-    color: #007BFF;
-    margin-bottom: 1em;
-    text-transform: uppercase;
-  }
-  
-  .resume section h2 {
-    border-bottom: 2px solid #007BFF;
-    margin-bottom: 1em;
-    padding-bottom: 0.5em;
-  }
-  
-  .resume section ul {
-    margin: 0;
-    padding-left: 2ch;
-    list-style: none;
-  }
-  
-  .resume section ul li {
-    margin-bottom: 0.8em;
-    font-size: 1.1em;
-  }
-  
-  .line {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-  }
-  
-  .right-side {
-    margin-left: auto;
-    text-align: right;
-  }
   
   /* Styling for resume header */
   
