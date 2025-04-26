@@ -154,7 +154,55 @@ body {
       color: #bb86fc;
     }
   }
+  /* Resume styling for light mode(default) */
+  .resume {
+    padding-top: 2em;
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+  }
   
+  .resume h1 {
+    font-size: 250%;
+    color: #333;
+    text-align: center;
+  }
+  .resume header{
+    color: var(--text-color);
+  }
+  .resume h2 {
+    font-size: 1.5em;
+    color: #007BFF;
+    margin-bottom: 1em;
+    text-transform: uppercase;
+  }
+  
+  .resume section h2 {
+    border-bottom: 2px solid #007BFF;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+  }
+  
+  .resume section ul {
+    margin: 0;
+    padding-left: 2ch;
+    list-style: none;
+  }
+  
+  .resume section ul li {
+    margin-bottom: 0.8em;
+    font-size: 1.1em;
+  }
+  
+  .line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  
+  .right-side {
+    margin-left: auto;
+    text-align: right;
+  }
   
   /* Styling for resume header */
   
@@ -209,11 +257,11 @@ body {
   .resume section ul li strong {
     color: #03dac6;
   }
-  article header {
-    color: #ffffff;
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--text-color);
   }
-  article time {
-    color: #aaaaaa;
+  article header {
+    color: var(--text-color);
   }
 }
   /* Styling for Skills & Interests */
