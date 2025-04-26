@@ -7,7 +7,7 @@ if (projectsContainer) {
     renderProjects(latestProjects, projectsContainer, 'h2');
   }
 
-const githubData = await fetchGitHubData('GalaxyBrain2');
+const githubData = await fetchGitHubData('RyanCao2005');
 const profileStats = document.querySelector('#profile-stats');
 if (profileStats) {
     profileStats.innerHTML = `
