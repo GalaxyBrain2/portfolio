@@ -82,10 +82,9 @@ body {
   .projects article {
     background: var(--background-color);
     border: 1px solid var(--border-color);
-    
   }
   
-  .projects h2 {
+  h2 {
     margin: 0;
     font-size: 1.2em;
   }
@@ -239,4 +238,73 @@ body {
   font-weight: bold;
   grid-row: 2;
   color: var(--text-color);
+}
+/*Pie Chart styling */
+#projects-pie-plot {
+  max-width: 20em;
+  margin-block: 2em;
+  overflow: visible;
+}
+.chart-container {
+  display: flex;
+  align-items: center;
+  gap: 20px; 
+}
+.legend {
+  list-style: none;
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+  display: flex;
+  flex-wrap: wrap;
+  grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+  gap: 1em;
+  margin-left: 2em;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.swatch {
+  width: 1em;
+  height: 1em;
+  background-color: var(--color);
+  border-radius: 0.25em;
+  display: inline-block;
+}
+&:has(path:hover) {
+  path:not(:hover) {
+    opacity: 0.5;
+  }
+}
+path {
+  transition: 300ms;
+}
+
+.selected {
+  --color: oklch(60% 45% 0) !important;
+
+  &:is(path) {
+    fill: var(--color);
+  }
+}
+/* Search Bar styling*/
+.search-container {
+  width: 100%;
+  display: flex;
+  justify-content: center; 
+  margin-block: 1.5em;
+}
+
+.searchBar {
+  width: 100%;
+  height: 56px;
+  font-size: 18px;
+  padding: 0 16px;
+  border: 1px solid #424141;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }

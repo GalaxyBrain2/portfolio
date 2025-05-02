@@ -76,7 +76,11 @@ document.body.insertAdjacentHTML(
       article.innerHTML = `
         <${headingLevel}>${project.title}</${headingLevel}>
         <img src="${project.image}" alt="${project.title}">
-        <p>${project.description}</p>
+        <div>
+          <p>${project.description}</p>
+          <p style="color: gray; font-size: 0.9em;">${"C. "+project.year}</p>
+        </div>
+
       `;
       container.appendChild(article);
     }
