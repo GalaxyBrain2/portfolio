@@ -22,7 +22,7 @@ async function loadData() {
         let { author, date, time, timezone, datetime } = first;
         let ret = {
           id: commit,
-          url: 'https://github.com/vis-society/lab-7/commit/' + commit,
+          url: 'https://github.com/GalaxyBrain2/portfolio/commit/' + commit,
           author,
           date,
           time,
@@ -131,7 +131,15 @@ async function loadData() {
     .attr('cx', (d) => xScale(d.datetime))
     .attr('cy', (d) => yScale(d.hourFrac))
     .attr('r', 5)
-    .attr('fill', 'steelblue');
+    .attr('fill', 'steelblue')
+    .on('mouseenter', (event, commit) => {
+      renderTooltipContent(commit);
+      updateTooltipVisibility(true);
+      updateTooltipPosition(event);
+    })
+    .on('mouseleave', () => {
+        updateTooltipVisibility(false);
+    });
 
   // Create the axes
   const xAxis = d3.axisBottom(xScale);
@@ -159,5 +167,39 @@ async function loadData() {
   gridlines.call(d3.axisLeft(yScale).tickFormat('').tickSize(-usableArea.width));
 }
    
-   renderScatterPlot(data, commits);
+renderScatterPlot(data, commits);
+function renderTooltipContent(commit) {
+  const link = document.getElementById('commit-link');
+  const date = document.getElementById('commit-date');
+  const time = document.getElementById('commit-time');
+  const author = document.getElementById('commit-author');
+  const lines = document.getElementById('commit-lines');
+  
+  
+
+  if (Object.keys(commit).length === 0) return;
+
+  link.href = commit.url;
+  link.textContent = commit.id;
+  date.textContent = commit.datetime?.toLocaleString('en', {
+    dateStyle: 'full',
+  });
+  time.textContent = commit.time;
+  
+  author.textContent = commit.author;
+
+  lines.textContent = commit.totalLines;
+     
+}
+
+function updateTooltipVisibility(isVisible) {
+  const tooltip = document.getElementById('commit-tooltip');
+  tooltip.hidden = !isVisible;
+}
+function updateTooltipPosition(event) {
+  const tooltip = document.getElementById('commit-tooltip');
+  tooltip.style.left = `${event.clientX}px`;
+  tooltip.style.top = `${event.clientY}px`;
+}
+
 
