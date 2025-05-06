@@ -310,7 +310,7 @@ path {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 /* Metadata styling */
-.stats {
+#stats {
   width: 100%;
   max-width: none;
   margin: 2em 0;
@@ -325,7 +325,7 @@ path {
   width: 100%; 
 }
 
-.stats dt {
+#stats dt {
   font-size: 0.9em;
   color: #7e7e7e;
   font-weight: bold;
@@ -333,7 +333,7 @@ path {
   grid-row: 1;
   text-align: left;
 }
-.stats dd {
+#stats dd {
   font-size: 2em;
   margin: 0;
   grid-row: 2;
@@ -350,7 +350,7 @@ circle:hover {
 }
 dl.info {
   display: grid;
-  grid-template-columns: max-content auto;
+  grid-template-columns: auto 1fr;
   gap: 0.25em 0.5em;
   margin: 0;
   padding: 0.75em 1em;
@@ -414,23 +414,24 @@ dl.info[hidden]:not(:hover, :focus-within) {
 circle.selected {
   fill: #ff6b6b;
 }
-.language-breakdown {
+#language-breakdown {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Responsive columns */
-  grid-auto-rows: auto;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* ensures row-style layout */
   gap: 0.75em;
   text-align: center;
   padding: 1em;
 }
 
-.language-breakdown dt {
+#language-breakdown dt {
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  grid-row: 1;
   color: #333;
 }
 
-.language-breakdown dd {
+#language-breakdown dd {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
+  grid-row: 2;
   color: #555;
 }
