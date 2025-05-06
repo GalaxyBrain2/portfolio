@@ -309,3 +309,33 @@ path {
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
+/* Metadata styling */
+.stats {
+  width: 100%;
+  max-width: none;
+  margin: 2em 0;
+  text-align: left;
+  padding: 0;
+}
+
+#stats dl {
+  display: grid;
+  text-align: left;
+  gap: 0.5em 1em;
+  width: 100%; 
+}
+
+.stats dt {
+  font-size: 0.9em;
+  color: #7e7e7e;
+  font-weight: bold;
+  text-transform: uppercase;
+  grid-row: 1;
+  text-align: left;
+}
+.stats dd {
+  font-size: 2em;
+  margin: 0;
+  grid-row: 2;
+  text-align: left;
+}
