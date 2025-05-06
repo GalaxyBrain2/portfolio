@@ -77,12 +77,12 @@ async function loadData() {
     dl.append('dd').text(numFiles);
 
     // Add maximum file length
-    dl.append('dt').text('Maximum file length');
+    dl.append('dt').text('Maximum file length (lines)');
     dl.append('dd').text(maxLines);
 
     // Add longest file name
-    dl.append('dt').text('Longest file');
-    dl.append('dd').text(longestFile);
+    dl.append('dt').text('Longest file (lines)');
+    dl.append('dd').text(`${longestFile} (${maxLines})`);
   }
   
   let data = await loadData();
