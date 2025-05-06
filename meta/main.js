@@ -87,9 +87,16 @@ async function loadData() {
   
   renderCommitInfo(data, commits);
   function renderScatterPlot(data, commits) {
-    // Put all the JS code of Steps inside this function
-    const width = 1000;
+  // Put all the JS code of Steps inside this function
+  const width = 1000;
   const height = 600;
+  const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines);
+  const rScale = d3
+  .scaleSqrt() // Change only this line
+  .domain([minLines, maxLines])
+  .range([2, 30]);
+  const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
+
 
   const margin = { top: 10, right: 10, bottom: 30, left: 20 };
 
@@ -127,17 +134,22 @@ async function loadData() {
   dots
     .selectAll('circle')
     .data(commits)
+    .data(sortedCommits)
     .join('circle')
     .attr('cx', (d) => xScale(d.datetime))
     .attr('cy', (d) => yScale(d.hourFrac))
     .attr('r', 5)
     .attr('fill', 'steelblue')
+    .attr('r', (d) => rScale(d.totalLines))
+    .style('fill-opacity', 0.7) 
     .on('mouseenter', (event, commit) => {
+      d3.select(event.currentTarget).style('fill-opacity', 1);
       renderTooltipContent(commit);
       updateTooltipVisibility(true);
       updateTooltipPosition(event);
     })
     .on('mouseleave', () => {
+        d3.select(event.currentTarget).style('fill-opacity', 0.7);
         updateTooltipVisibility(false);
     });
 
