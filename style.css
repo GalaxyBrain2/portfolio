@@ -360,7 +360,7 @@ dl.info {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(6px);
   max-width: 300px;
-  pointer-events: none;
+  pointer-events: auto;
   position: fixed;
   top: 1em;
   left: 1em;

@@ -1,9 +1,9 @@
-name: Deploy static content to Pages
+name: Deploy metadata content to pages
 
 on:
 
   push:
-    branches: ['main']
+    branches: -main
 
 
   workflow_dispatch:
@@ -21,9 +21,10 @@ concurrency:
 
 jobs:
   deploy:
+    name: Deploy
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -31,8 +32,7 @@ jobs:
         with:
           fetch-depth: '0'
       - name: Run Elocuent
-        run: |
-          npx elocuent -d . -o meta/loc.csv
+        run: npx elocuent -d . -o meta/loc.csv
 
       - name: Commit and Push
         run: |
@@ -43,7 +43,7 @@ jobs:
           git add -f meta/loc.csv
           git commit -m "Update code statistics" || echo "No changes to commit"
           git push
-          
+      #set
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
