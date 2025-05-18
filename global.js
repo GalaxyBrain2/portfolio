@@ -72,16 +72,17 @@ document.body.insertAdjacentHTML(
   
   export function renderProjects(projects, container, headingLevel = 'h2') {
     container.innerHTML = "";
+    const baseUrl = location.hostname === 'galaxybrain2.github.io' ? '/portfolio' : '';
     for (let project of projects) {
       const article = document.createElement('article');
+      const imagePath = project.image.startsWith('http') ? project.image : `${baseUrl}${project.image}`;
       article.innerHTML = `
         <${headingLevel}>${project.title}</${headingLevel}>
-        <img src="${project.image}" alt="${project.title}">
+        <img src="${imagePath}" alt="${project.title}">
         <div>
           <p>${project.description}</p>
           <p style="color: gray; font-size: 0.9em;">${"C. "+project.year}</p>
         </div>
-
       `;
       container.appendChild(article);
     }

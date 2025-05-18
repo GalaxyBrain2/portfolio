@@ -1,6 +1,8 @@
 import { fetchJSON, renderProjects, fetchGitHubData } from './global.js';
 
-const projects = await fetchJSON('./lib/projects.json');
+// Get the base URL dynamically
+const baseUrl = location.hostname === 'galaxybrain2.github.io' ? '/portfolio' : '';
+const projects = await fetchJSON(`${baseUrl}/lib/projects.json`);
 const latestProjects = projects.slice(0, 3);
 const projectsContainer = document.querySelector('.projects');
 if (projectsContainer) {
