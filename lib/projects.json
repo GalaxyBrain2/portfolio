@@ -2,7 +2,7 @@
     {
         "title": "BikeWatch: Boston's Dynamic Bike Traffic Visualizer",
         "year": "2024",
-        "image": "../images/bikeproject.png",
+        "image": "/portfolio/images/bikeproject.png",
         "description": "An interactive geospatial visualization of Boston's bike traffic patterns using Mapbox GL JS and D3.js. Features real-time filtering of 260,000+ bike trips, color-coded traffic flow indicators, and dynamic bike lane overlays. Integrates data from Boston and Cambridge bike networks with BlueBikes station data to reveal urban mobility patterns.",
         "url": "https://galaxybrain2.github.io/bikewatching/"
     },

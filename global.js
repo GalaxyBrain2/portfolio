@@ -1,4 +1,4 @@
-console.log('IT’S ALIVE!');
+
 function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
@@ -72,12 +72,24 @@ document.body.insertAdjacentHTML(
   
   export function renderProjects(projects, container, headingLevel = 'h2') {
     container.innerHTML = "";
-    const baseUrl = location.hostname === 'galaxybrain2.github.io' ? '/portfolio' : '';
+    const isGitHubPages = location.hostname === 'galaxybrain2.github.io';
+    
     for (let project of projects) {
       const article = document.createElement('article');
-      const imagePath = project.image.startsWith('http') ? project.image : `${baseUrl}${project.image}`;
+      
+      // Handle image path based on environment and path type
+      let imagePath = project.image;
+      if (!imagePath.startsWith('http')) {
+        // file pathing for local and deployment development
+        imagePath = isGitHubPages ? imagePath : imagePath.replace('/portfolio/', '/');
+      }
+      
+      const titleHtml = project.url ? 
+        `<${headingLevel}><a href="${project.url}" target="_blank">${project.title}</a></${headingLevel}>` :
+        `<${headingLevel}>${project.title}</${headingLevel}>`;
+        
       article.innerHTML = `
-        <${headingLevel}>${project.title}</${headingLevel}>
+        ${titleHtml}
         <img src="${imagePath}" alt="${project.title}">
         <div>
           <p>${project.description}</p>
