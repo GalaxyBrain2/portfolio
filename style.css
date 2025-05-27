@@ -348,10 +348,6 @@ circle {
     r: 0;
   }
 }
-
-circle:hover {
-  transform: scale(1.5);
-}
 dl.info {
   display: grid;
   grid-template-columns: auto 1fr;

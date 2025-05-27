@@ -211,14 +211,16 @@ function renderScatterPlot(data, commits) {
     .style('--r', (d) => rScale(d.totalLines))
     .attr('fill', 'steelblue')
     .style('fill-opacity', 0.7)
-    .on('mouseenter', (event, commit) => {
-      d3.select(event.currentTarget).style('fill-opacity', 1);
-      renderTooltipContent(commit);
+    .on('mouseenter', function(event, d) {
+      d3.select(this).attr('r', rScale(d.totalLines) * 1.5);
+      d3.select(this).style('fill-opacity', 1);
+      renderTooltipContent(d);
       updateTooltipVisibility(true);
       updateTooltipPosition(event);
     })
-    .on('mouseleave', (event) => {
-      d3.select(event.currentTarget).style('fill-opacity', 0.7);
+    .on('mouseleave', function(event, d) {
+      d3.select(this).attr('r', rScale(d.totalLines));
+      d3.select(this).style('fill-opacity', 0.7);
       updateTooltipVisibility(false);
     });
 
@@ -405,14 +407,16 @@ function updateScatterPlot(data, commits) {
     .style('--r', (d) => rScale(d.totalLines))
     .attr('fill', 'steelblue')
     .style('fill-opacity', 0.7)
-    .on('mouseenter', (event, commit) => {
-      d3.select(event.currentTarget).style('fill-opacity', 1);
-      renderTooltipContent(commit);
+    .on('mouseenter', function(event, d) {
+      d3.select(this).attr('r', rScale(d.totalLines) * 1.5);
+      d3.select(this).style('fill-opacity', 1);
+      renderTooltipContent(d);
       updateTooltipVisibility(true);
       updateTooltipPosition(event);
     })
-    .on('mouseleave', (event) => {
-      d3.select(event.currentTarget).style('fill-opacity', 0.7);
+    .on('mouseleave', function(event, d) {
+      d3.select(this).attr('r', rScale(d.totalLines));
+      d3.select(this).style('fill-opacity', 0.7);
       updateTooltipVisibility(false);
     });
 }
