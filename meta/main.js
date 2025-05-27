@@ -1,4 +1,5 @@
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
+import scrollama from 'https://cdn.jsdelivr.net/npm/scrollama@3.2.0/+esm';
 let yScale = "";
 let xScale = "";
 
@@ -48,7 +49,8 @@ async function loadData() {
         });
   
         return ret;
-      });
+      })
+      .sort((a, b) => a.datetime - b.datetime);
   }
 
   function renderCommitInfo(data, commits) {
@@ -100,12 +102,9 @@ timeScale = d3
   .range([0, 100]);
 commitMaxTime = timeScale.invert(commitProgress);
 
-let filteredCommits = commits;
+let filteredCommits = [commits[0]];
 
-const slider = document.getElementById('commit-progress');
 const commitTime = document.getElementById('commit-time');
-
-
 
 commitTime.textContent = commitMaxTime.toLocaleString(undefined, {
   dateStyle: 'long',
@@ -154,23 +153,7 @@ function updateFileDisplay(filteredCommits) {
   });
 }
 
-// Update slider event listener to include file display update
-slider.addEventListener('input', () => {
-  commitProgress = +slider.value;
-  commitMaxTime = timeScale.invert(commitProgress);
-  commitTime.textContent = commitMaxTime.toLocaleString(undefined, {
-    dateStyle: 'long',
-    timeStyle: 'short'
-  });
 
-  // Filter commits and updates plot
-  filteredCommits = commits.filter(d => d.datetime <= commitMaxTime);
-  updateScatterPlot(data, filteredCommits);
-  updateFileDisplay(filteredCommits);
-});
-
-// Initial file display
-updateFileDisplay(filteredCommits);
 
 renderCommitInfo(data, commits);
 function renderScatterPlot(data, commits) {
@@ -225,6 +208,7 @@ function renderScatterPlot(data, commits) {
     .attr('cx', (d) => xScale(d.datetime))
     .attr('cy', (d) => yScale(d.hourFrac))
     .attr('r', (d) => rScale(d.totalLines))
+    .style('--r', (d) => rScale(d.totalLines))
     .attr('fill', 'steelblue')
     .style('fill-opacity', 0.7)
     .on('mouseenter', (event, commit) => {
@@ -308,7 +292,7 @@ function createBrushSelector(svg) {
 
   brushGroup.call(d3.brush().on('start brush end', brushed));
 
-  // Raise dots and everything after overlay
+
   svg.selectAll('.dots').raise();
 }
 function brushed(event) {
@@ -418,6 +402,7 @@ function updateScatterPlot(data, commits) {
     .attr('cx', (d) => xScale(d.datetime))
     .attr('cy', (d) => yScale(d.hourFrac))
     .attr('r', (d) => rScale(d.totalLines))
+    .style('--r', (d) => rScale(d.totalLines))
     .attr('fill', 'steelblue')
     .style('fill-opacity', 0.7)
     .on('mouseenter', (event, commit) => {
@@ -431,3 +416,122 @@ function updateScatterPlot(data, commits) {
       updateTooltipVisibility(false);
     });
 }
+
+
+d3.select('#scatter-story')
+  .selectAll('.step')
+  .data(commits)
+  .join('div')
+  .attr('class', 'step')
+  .html(
+    (d, i) => `
+    On ${d.datetime.toLocaleString('en', {
+      dateStyle: 'full',
+      timeStyle: 'short',
+    })},
+    I made <a href="${d.url}" target="_blank">${
+      i > 0 ? 'another glorious commit' : 'my first commit, and it was glorious'
+    }</a>.
+    I edited ${d.totalLines} lines across ${
+      d3.rollups(
+        d.lines,
+        (D) => D.length,
+        (d) => d.file,
+      ).length
+    } files.
+    Then I looked over all I had made, and I saw that it was very good.
+    `,
+  );
+  function onStepEnter(response) {
+    const commitDate = response.element.__data__.datetime;
+    commitMaxTime = commitDate;
+    commitTime.textContent = commitMaxTime.toLocaleString(undefined, {
+      dateStyle: 'long',
+      timeStyle: 'short'
+    });
+  
+    // Filter commits up to the current commit 
+    filteredCommits = commits.filter(d => d.datetime <= commitMaxTime);
+    
+    // Updates all viz
+    updateScatterPlot(data, filteredCommits);
+    updateFileDisplay(filteredCommits);
+    
+    // Updates metadata
+    const stats = d3.select('#stats');
+    stats.selectAll('*').remove();
+    
+    // Calculates current stats
+    const currentLines = filteredCommits.flatMap(d => d.lines);
+    const currentFiles = d3.groups(currentLines, d => d.file);
+    const fileLengths = d3.rollups(
+      currentLines,
+      v => d3.max(v, d => d.line),
+      d => d.file
+    );
+    const [longestFile, maxLines] = d3.greatest(fileLengths, d => d[1]);
+  
+  
+    const dl = stats.append('dl').attr('class', 'stats');
+    
+    // total LOC
+    dl.append('dt').html('Total <abbr title="Lines of code">LOC</abbr>');
+    dl.append('dd').text(currentLines.length);
+    
+    // total commits
+    dl.append('dt').text('Total commits');
+    dl.append('dd').text(filteredCommits.length);
+    
+    // number of files
+    dl.append('dt').text('Number of files');
+    dl.append('dd').text(currentFiles.length);
+    
+    // maximum file length
+    dl.append('dt').text('Maximum file length (lines)');
+    dl.append('dd').text(maxLines);
+    
+    // longest file name
+    dl.append('dt').text('Longest file (lines)');
+    dl.append('dd').text(`${longestFile} (${maxLines})`);
+  }
+const scroller = scrollama();
+scroller
+  .setup({
+    container: '#scrolly-1',
+    step: '#scrolly-1 .step',
+  })
+  .onStepEnter(onStepEnter);
+
+
+d3.select('#scroll-story')
+  .selectAll('.step')
+  .data(commits)
+  .join('div')
+  .attr('class', 'step')
+  .html(
+    (d, i) => `
+    On ${d.datetime.toLocaleString('en', {
+      dateStyle: 'full',
+      timeStyle: 'short',
+    })},
+    I made <a href="${d.url}" target="_blank">${
+      i > 0 ? 'another glorious commit' : 'my first commit, and it was glorious'
+    }</a>.
+    I edited ${d.totalLines} lines across ${
+      d3.rollups(
+        d.lines,
+        (D) => D.length,
+        (d) => d.file,
+      ).length
+    } files.
+    Then I looked over all I had made, and I saw that it was very good.
+    `,
+  );
+
+const scrollOption = scrollama();
+scrollOption
+  .setup({
+    container: '#scroll-option',
+    step: '#scroll-option .step',
+  })
+  .onStepEnter(onStepEnter);

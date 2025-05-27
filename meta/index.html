@@ -13,48 +13,44 @@
  
     <h1>Meta</h1>
     <p>This page includes visualizations about the code of this website.</p>
-    <div id="slider-container" style="display: baseline; margin-bottom: 1em;">
-      <label for="commit-progress" style="flex: 1;">
-        Show commits until:
-        <input type="range" id="commit-progress" min="0" max="100" value="100">
-      </label>
-      <time id="commit-time" style="margin-left: auto;"></time>
+
+    <div id="metadata">
+      <div id="stats"></div>
     </div>
 
-    <dl id="files">
-      <!-- we want the following structure for each file:
-      <div>
-        <dt>
-          <code>{file.name}</code>
-        </dt>
-        <dd>{file.lines.length} lines</dd>
+    <div id="scrolly-1">
+      <div id="scatter-story"></div>
+      <div id="scatter-plot">
+        <h2>Commits by time of day</h2>
+        <div id="chart"></div>
+        <dl id="commit-tooltip" class="info tooltip" hidden>
+            <dt>Commit</dt>
+            <dd>
+              <a href="" id="commit-link" target="_blank"></a>
+            </dd>
+          
+            <dt>Date</dt>
+            <dd id="commit-date"></dd>
+          
+            <dt>Time</dt>
+            <dd id="commit-time"></dd>
+
+            <dt>Author</dt>
+            <dd id="commit-author"></dd>
+
+            <dt>Lines Edited</dt>
+            <dd id="commit-lines"></dd>
+        </dl>
+        <p id="selection-count">No commits selected</p>
+        <dl id="language-breakdown" class="stats"></dl>
       </div>
-      -->
-    </dl>
+    </div>
 
-    <div id="stats"></div>
-    <h2>Commits by time of day</h2>
-    <div id="chart"></div>
-    <dl id="commit-tooltip" class="info tooltip" hidden>
-        <dt>Commit</dt>
-        <dd>
-          <a href="" id="commit-link" target="_blank"></a>
-        </dd>
-      
-        <dt>Date</dt>
-        <dd id="commit-date"></dd>
-      
-        <!-- Add: Time, author, lines edited -->
-        <dt>Time</dt>
-        <dd id="commit-time"></dd>
-
-        <dt>Author</dt>
-        <dd id="commit-author"></dd>
-
-        <dt>Lines Edited</dt>
-        <dd id="commit-lines"></dd>
-    </dl>
-    <p id="selection-count">No commits selected</p>
-    <dl id="language-breakdown" class="stats"></dl>
+    <div id="scroll-option">
+      <div id="scroll-story"></div>
+      <div id="scroll-plot">
+        <dl id="files"></dl>
+      </div>
+    </div>
  </body>
  </html>

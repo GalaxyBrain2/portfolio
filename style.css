@@ -340,12 +340,12 @@ path {
   text-align: left;
 }
 circle {
-  transition: 200ms;
-  transform-origin: center;
-  transform-box: fill-box;
-  @starting-style {
+  transition: all 200ms, r calc(var(--r) * 100ms);
+}
+
+@starting-style {
+  circle {
     r: 0;
-    transition: all 200ms, r calc(var(--r) * 100ms);
   }
 }
 
@@ -472,4 +472,76 @@ circle.selected {
   aspect-ratio: 1;
   background: var(--color);
   border-radius: 50%;
+}
+
+#metadata {
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+  padding: 1rem;
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#scrolly-1 {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+  padding: 1rem;
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  > * {
+    flex: 1;
+  }
+}
+
+#scroll-option {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  > * {
+    flex: 1;
+  }
+}
+
+#scatter-story, #scroll-story {
+  position: relative;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 1rem;
+  border-right: 1px solid var(--border-color);
+}
+
+#scatter-plot, #scroll-plot {
+  position: sticky;
+  top: 0;
+  left: 0;
+  bottom: auto;
+  height: 50vh;
+}
+
+.step {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: var(--background-color);
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.step:hover {
+  background: color-mix(in oklch, var(--color-accent), canvas 88%);
 }
