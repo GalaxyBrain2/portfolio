@@ -106,11 +106,55 @@ const slider = document.getElementById('commit-progress');
 const commitTime = document.getElementById('commit-time');
 
 
+
 commitTime.textContent = commitMaxTime.toLocaleString(undefined, {
   dateStyle: 'long',
   timeStyle: 'short'
 });
 
+function updateFileDisplay(filteredCommits) {
+  let lines = filteredCommits.flatMap((d) => d.lines);
+  let files = d3
+    .groups(lines, (d) => d.file)
+    .map(([name, lines]) => {
+      return { name, lines };
+    })
+    .sort((a, b) => b.lines.length - a.lines.length);
+
+  let colors = d3.scaleOrdinal(d3.schemeTableau10);
+
+  let filesContainer = d3
+    .select('#files')
+    .selectAll('div')
+    .data(files, (d) => d.name)
+    .join(
+      // This code only runs when the div is initially rendered
+      (enter) =>
+        enter.append('div').call((div) => {
+          div.append('dt').call(dt => {
+            dt.append('code');
+            dt.append('small');
+          });
+          div.append('dd');
+        }),
+    );
+
+  // Update the file names and line counts
+  filesContainer.select('dt > code').text((d) => d.name);
+  filesContainer.select('dt > small').text((d) => `${d.lines.length} lines`);
+
+  // Create dots for each line
+  filesContainer.each(function(d) {
+    const dd = d3.select(this).select('dd');
+    dd.selectAll('div.loc')
+      .data(d.lines)
+      .join('div')
+      .attr('class', 'loc')
+      .style('--color', d => colors(d.type));
+  });
+}
+
+// Update slider event listener to include file display update
 slider.addEventListener('input', () => {
   commitProgress = +slider.value;
   commitMaxTime = timeScale.invert(commitProgress);
@@ -122,7 +166,11 @@ slider.addEventListener('input', () => {
   // Filter commits and updates plot
   filteredCommits = commits.filter(d => d.datetime <= commitMaxTime);
   updateScatterPlot(data, filteredCommits);
+  updateFileDisplay(filteredCommits);
 });
+
+// Initial file display
+updateFileDisplay(filteredCommits);
 
 renderCommitInfo(data, commits);
 function renderScatterPlot(data, commits) {
