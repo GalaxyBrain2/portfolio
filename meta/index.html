@@ -13,6 +13,13 @@
  
     <h1>Meta</h1>
     <p>This page includes visualizations about the code of this website.</p>
+    <div id="slider-container" style="display: baseline; margin-bottom: 1em;">
+      <label for="commit-progress" style="flex: 1;">
+        Show commits until:
+        <input type="range" id="commit-progress" min="0" max="100" value="100">
+      </label>
+      <time id="commit-time" style="margin-left: auto;"></time>
+    </div>
     <div id="stats"></div>
     <h2>Commits by time of day</h2>
     <div id="chart"></div>
