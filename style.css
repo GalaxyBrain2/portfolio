@@ -541,3 +541,9 @@ circle.selected {
 .step:hover {
   background: color-mix(in oklch, var(--color-accent), canvas 88%);
 }
+#files dt small {
+  display: block;
+  margin-top: 0.2em;
+  font-size: 0.9em;
+  opacity: 0.7;
+}
